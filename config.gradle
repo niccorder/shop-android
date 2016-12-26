@@ -12,6 +12,8 @@ ext {
   recyclerview = "com.android.support:recyclerview-v7:$androidSuppVersion"
   design = "com.android.support:design:$androidSuppVersion"
 
+  guavaCollections = "com.google.guava:guava-collections:r03"
+  guava = "com.google.guava:guava:20.0"
   leakCanary = "com.squareup.leakcanary:leakcanary-android:1.5"
   timber = "com.jakewharton.timber:timber:4.0.1"
 

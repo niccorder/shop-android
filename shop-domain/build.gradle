@@ -5,6 +5,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
   compile project.ext.rxjava
+  compile project.ext.guava
 }
 
 repositories {
