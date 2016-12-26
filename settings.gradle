@@ -1,0 +1,3 @@
+include ':shop-app'
+include ':shop-data'
+include ':shop-domain'

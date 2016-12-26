@@ -1,0 +1,35 @@
+apply from: "$rootDir/config.gradle"
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+  compileSdkVersion project.ext.targetSdk
+  buildToolsVersion project.ext.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion project.ext.minSdk
+    targetSdkVersion project.ext.targetSdk
+    versionCode project.ext.versionCode
+    versionName project.ext.versionName
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  compile project.ext.rxjava
+  compile project.ext.retrofit
+  compile project.ext.retrofit_rxjava
+  compile project.ext.retrofit_jackson
+
+  testCompile project.ext.junit
+  testCompile project.ext.retrofit_mock
+}
+
+repositories { jcenter() }

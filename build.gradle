@@ -1,0 +1,14 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:2.2.3'
+    classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion '3.2.1'
+  distributionUrl 'https://services.gradle.org/distributions/gradle-3.2.1-all.zip'
+}

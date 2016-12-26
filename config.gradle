@@ -1,0 +1,43 @@
+ext {
+
+  basePackage = 'me.niccorder.shop'
+  buildToolsVersion = '25.0.2'
+  minSdk = 16
+  targetSdk = 25
+  versionCode = 170100
+  versionName = "17.1.0"
+
+  def androidSuppVersion = '25.1.0'
+  appcompatv7 = "com.android.support:appcompat-v7:$androidSuppVersion"
+  recyclerview = "com.android.support:recyclerview-v7:$androidSuppVersion"
+  design = "com.android.support:design:$androidSuppVersion"
+
+  leakCanary = "com.squareup.leakcanary:leakcanary-android:1.5"
+  timber = "com.jakewharton.timber:timber:4.0.1"
+
+  def okhttpVersion = '3.5.0'
+  okhttp = "com.squareup.okhttp3:okhttp:$okhttpVersion"
+  okhttpLogger = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+  okhttpMock = "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+
+  rxjava = 'io.reactivex:rxjava:1.2.4'
+  rxandroid = 'io.reactivex:rxandroid:1.2.1'
+
+  def rxbindingVersion = '1.0.0'
+  rxbinding = "com.jakewharton.rxbinding:rxbinding:$rxbindingVersion"
+  rxbinding_supportv4 = "com.jakewharton.rxbinding:rxbinding-support-v4:$rxbindingVersion"
+  rxbinding_appcompatv7 = "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rxbindingVersion"
+  rxbinding_design = "com.jakewharton.rxbinding:rxbinding-design:$rxbindingVersion"
+  rxbinding_recycler = "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:$rxbindingVersion"
+
+  def retrofitVersion = '2.1.0'
+  retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+  retrofit_rxjava = "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+  retrofit_jackson = "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
+  retrofit_mock = "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
+
+
+  /* Testing dependencies */
+  espresso = 'com.android.support.test.espresso:espresso-core:2.2.2'
+  junit = 'junit:junit:4.12'
+}

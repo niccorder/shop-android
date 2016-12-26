@@ -1,0 +1,66 @@
+apply from: "$rootDir/config.gradle"
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+repositories {
+  jcenter()
+  mavenCentral()
+}
+
+android {
+  compileSdkVersion project.ext.targetSdk
+  buildToolsVersion project.ext.buildToolsVersion
+
+  defaultConfig {
+    applicationId "me.niccorder.shop.app"
+    minSdkVersion project.ext.minSdk
+    targetSdkVersion project.ext.targetSdk
+    versionCode project.ext.versionCode
+    versionName project.ext.versionName
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  lintOptions {
+    abortOnError false
+  }
+}
+
+dependencies {
+
+  compile project.ext.appcompatv7
+  compile project.ext.recyclerview
+  compile project.ext.design
+
+  compile project.ext.rxjava
+  compile project.ext.rxandroid
+  compile project.ext.rxbinding
+  compile project.ext.rxbinding_supportv4
+  compile project.ext.rxbinding_appcompatv7
+  compile project.ext.rxbinding_design
+  compile project.ext.rxbinding_recycler
+
+  compile project.ext.leakCanary
+  compile project.ext.timber
+
+  annotationProcessor 'com.jakewharton:butterknife-compiler:8.0.1'
+  annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+  provided 'javax.annotation:jsr250-api:1.0'
+
+  compile 'com.google.dagger:dagger:2.7'
+  compile 'com.jakewharton:butterknife:8.0.1'
+
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2',
+      { exclude group: 'com.android.support', module: 'support-annotations' })
+  testCompile 'junit:junit:4.12'
+}

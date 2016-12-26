@@ -1,0 +1,12 @@
+apply from: "$rootDir/config.gradle"
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+  compile project.ext.rxjava
+}
+
+repositories {
+  jcenter()
+}
