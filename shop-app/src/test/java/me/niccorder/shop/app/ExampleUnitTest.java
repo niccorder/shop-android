@@ -1,4 +1,4 @@
-package me.niccorder.shop;
+package me.niccorder.shop.app;
 
 import org.junit.Test;
 

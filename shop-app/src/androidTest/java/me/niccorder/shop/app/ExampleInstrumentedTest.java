@@ -1,4 +1,4 @@
-package me.niccorder.shop;
+package me.niccorder.shop.app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

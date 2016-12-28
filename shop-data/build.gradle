@@ -30,6 +30,9 @@ dependencies {
 
   testCompile project.ext.junit
   testCompile project.ext.retrofit_mock
+
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2',
+          { exclude group: 'com.android.support', module: 'support-annotations' })
 }
 
 repositories { jcenter() }
