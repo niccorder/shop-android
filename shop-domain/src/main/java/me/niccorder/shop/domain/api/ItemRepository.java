@@ -4,7 +4,7 @@ import java.util.List;
 import me.niccorder.shop.domain.model.ItemModel;
 import rx.Observable;
 
-public interface ItemApi {
+public interface ItemRepository {
   Observable<ItemModel> getItem(final String id);
 
   Observable<List<ItemModel>> getItems(final int pageIndex, final int pageSize);

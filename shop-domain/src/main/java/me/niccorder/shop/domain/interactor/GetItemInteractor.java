@@ -1,9 +1,7 @@
 package me.niccorder.shop.domain.interactor;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import me.niccorder.shop.domain.api.ItemApi;
+import me.niccorder.shop.domain.api.ItemRepository;
 import me.niccorder.shop.domain.executor.ExecutionThread;
 import me.niccorder.shop.domain.executor.PostExecutionThread;
 import me.niccorder.shop.domain.util.Params;
@@ -13,12 +11,12 @@ public class GetItemInteractor extends AbstractInteractor {
 
   private static final String KEY_ITEM_ID = "key_item_id";
 
-  private final ItemApi itemRepository;
+  private final ItemRepository itemRepository;
 
   public GetItemInteractor(
       ExecutionThread executionThread,
       PostExecutionThread postExecutionThread,
-      ItemApi itemRepository
+      ItemRepository itemRepository
   ) {
     super(executionThread, postExecutionThread);
     this.itemRepository = itemRepository;
