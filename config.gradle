@@ -11,19 +11,21 @@ ext {
   appcompatv7 = "com.android.support:appcompat-v7:$androidSuppVersion"
   recyclerview = "com.android.support:recyclerview-v7:$androidSuppVersion"
   design = "com.android.support:design:$androidSuppVersion"
+  cardview = "com.android.support:cardview-v7:$androidSuppVersion"
 
   guavaCollections = "com.google.guava:guava-collections:r03"
   guava = "com.google.guava:guava:20.0"
   leakCanary = "com.squareup.leakcanary:leakcanary-android:1.5"
   timber = "com.jakewharton.timber:timber:4.0.1"
+  jsr = "javax.annotation:jsr250-api:1.0"
 
   def okhttpVersion = '3.5.0'
   okhttp = "com.squareup.okhttp3:okhttp:$okhttpVersion"
   okhttpLogger = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
   okhttpMock = "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 
-  rxjava = 'io.reactivex:rxjava:1.2.4'
-  rxandroid = 'io.reactivex:rxandroid:1.2.1'
+  rxjava = "io.reactivex:rxjava:1.2.4"
+  rxandroid = "io.reactivex:rxandroid:1.2.1"
 
   def rxbindingVersion = '1.0.0'
   rxbinding = "com.jakewharton.rxbinding:rxbinding:$rxbindingVersion"
@@ -38,8 +40,20 @@ ext {
   retrofit_jackson = "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
   retrofit_mock = "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
 
-
   /* Testing dependencies */
-  espresso = 'com.android.support.test.espresso:espresso-core:2.2.2'
-  junit = 'junit:junit:4.12'
+  espresso = "com.android.support.test.espresso:espresso-core:2.2.2"
+  junit = "junit:junit:4.12"
+
+
+  /* Generated build configuration variables. */
+  productionUrl = ['String', 'BASE_URL', '"https://api.niccorder.me"']
+  stagingUrl = productionUrl // for now.
+}
+
+configurations.all {
+  resolutionStrategy.force project.ext.jsr,
+      "com.fasterxml.jackson.core:jackson-core:2.7.2",
+      "com.fasterxml.jackson.databind:jackson-databind:2.7.2",
+      "com.fasterxml.jackson.core:jackson-annotations:2.7.2",
+      "com.google.code.findbugs:jsr305:3.0.1"
 }

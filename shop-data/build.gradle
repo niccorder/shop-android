@@ -3,6 +3,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
+  defaultPublishConfig "prodRelease"
   compileSdkVersion project.ext.targetSdk
   buildToolsVersion project.ext.buildToolsVersion
 
@@ -19,6 +20,31 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+    debug {
+      minifyEnabled false
+    }
+  }
+
+  productFlavors {
+    prod {
+      buildConfigField project.ext.productionUrl
+    }
+    stage {
+      buildConfigField project.ext.stagingUrl
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  packagingOptions {
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE.txt'
   }
 }
 
@@ -27,12 +53,15 @@ dependencies {
   compile project.ext.retrofit
   compile project.ext.retrofit_rxjava
   compile project.ext.retrofit_jackson
+  compile project.ext.timber
+
+  compile project(":shop-domain")
 
   testCompile project.ext.junit
   testCompile project.ext.retrofit_mock
 
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2',
-          { exclude group: 'com.android.support', module: 'support-annotations' })
+      { exclude group: 'com.android.support', module: 'support-annotations' })
 }
 
 repositories { jcenter() }
