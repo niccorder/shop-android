@@ -10,7 +10,7 @@
       android:supportsRtl="true"
       android:theme="@style/Theme.Shop">
     <activity
-        android:name=".pres.activity.MainActivity"
+        android:name=".view.activity.MainActivity"
         android:theme="@style/Theme.Shop">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>

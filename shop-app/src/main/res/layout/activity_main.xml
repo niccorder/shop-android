@@ -6,42 +6,30 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
-    tools:context=".pres.activity.MainActivity"
+    tools:context=".view.activity.MainActivity"
     >
 
   <android.support.design.widget.AppBarLayout
-      android:id="@+id/app_bar"
       android:layout_width="match_parent"
-      android:layout_height="?actionBarSize"
-      android:fitsSystemWindows="true"
+      android:layout_height="wrap_content"
       android:theme="@style/Theme.Shop.AppBarOverlay"
       >
 
-    <android.support.design.widget.CollapsingToolbarLayout
-        android:id="@+id/toolbar_layout"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        app:contentScrim="?attr/colorPrimary"
-        app:layout_scrollFlags="scroll|snap|enterAlways"
-        >
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/Theme.Shop.PopupOverlay"
+        app:title="@string/app_name"
+        />
 
-      <android.support.v7.widget.Toolbar
-          android:id="@+id/toolbar"
-          android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize"
-          app:popupTheme="@style/Theme.Shop.PopupOverlay"
-          />
-
-    </android.support.design.widget.CollapsingToolbarLayout>
   </android.support.design.widget.AppBarLayout>
 
   <android.support.v4.widget.NestedScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
-      tools:context=".pres.activity.MainActivity"
+      tools:context=".view.activity.MainActivity"
       >
 
     <TextView
@@ -60,7 +48,8 @@
       android:layout_gravity="bottom|center"
       app:elevation="@dimen/headerbar_elevation"
       app:itemBackground="@color/theme_primary"
-      app:itemIconTint="@color/app_white"
+      app:itemIconTint="@color/bottom_bar_item"
+      app:itemTextColor="@color/bottom_bar_item"
       app:menu="@menu/main"
       />
 </android.support.design.widget.CoordinatorLayout>
