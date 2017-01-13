@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-  defaultPublishConfig "prodRelease"
+  defaultPublishConfig "release"
   compileSdkVersion project.ext.targetSdk
   buildToolsVersion project.ext.buildToolsVersion
 
@@ -19,17 +19,17 @@ android {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      buildConfigField project.ext.productionUrl
+    }
+    stageRelease {
+      initWith(release)
+      buildConfigField project.ext.stagingUrl
     }
     debug {
       minifyEnabled false
     }
-  }
-
-  productFlavors {
-    prod {
-      buildConfigField project.ext.productionUrl
-    }
-    stage {
+    stagingDebug {
+      initWith(debug)
       buildConfigField project.ext.stagingUrl
     }
   }
@@ -49,6 +49,8 @@ android {
 }
 
 dependencies {
+  annotationProcessor project.ext.daggerProcessor
+  compile project.ext.dagger
   compile project.ext.rxjava
   compile project.ext.retrofit
   compile project.ext.retrofit_rxjava
@@ -56,6 +58,7 @@ dependencies {
   compile project.ext.timber
 
   compile project(":shop-domain")
+  compile project(":shop-util")
 
   testCompile project.ext.junit
   testCompile project.ext.retrofit_mock

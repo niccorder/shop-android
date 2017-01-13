@@ -13,6 +13,7 @@ public class GetItemInteractor extends AbstractInteractor {
 
   private final ItemRepository itemRepository;
 
+
   public GetItemInteractor(
       ExecutionThread executionThread,
       PostExecutionThread postExecutionThread,
