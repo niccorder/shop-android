@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import me.niccorder.shop.domain.executor.ExecutionThread;
 
+/** Allows us to run procs in the background */
 public class JobExecutor implements ExecutionThread {
 
   private final ThreadPoolExecutor threadPoolExecutor;
@@ -26,7 +27,7 @@ public class JobExecutor implements ExecutionThread {
     private int counter = 0;
 
     @Override public Thread newThread(@NonNull Runnable runnable) {
-      return new Thread(runnable, "shop_bgt_" + counter++);
+      return new Thread(runnable, "shop_" + counter++);
     }
   }
 }

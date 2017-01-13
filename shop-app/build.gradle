@@ -66,15 +66,16 @@ dependencies {
   compile project.ext.leakCanary
   compile project.ext.timber
 
-  annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+  annotationProcessor project.ext.daggerProcessor
   annotationProcessor 'com.jakewharton:butterknife-compiler:8.0.1'
   annotationProcessor 'com.airbnb.android:epoxy-processor:1.5.0'
   provided 'javax.annotation:jsr250-api:1.0'
 
-  compile 'com.google.dagger:dagger:2.7'
+  compile project.ext.dagger
   compile 'com.jakewharton:butterknife:8.0.1'
   compile 'com.airbnb.android:epoxy:1.5.0'
 
+  compile project(':shop-util')
   compile project(':shop-domain')
   compile project(':shop-data')
 

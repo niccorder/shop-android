@@ -5,16 +5,16 @@ import android.support.design.widget.BottomNavigationView;
 import butterknife.BindView;
 import javax.inject.Inject;
 import me.niccorder.shop.app.R;
-import me.niccorder.shop.app.di.HasComponent;
 import me.niccorder.shop.app.di.compontents.ActivityComponent;
 import me.niccorder.shop.app.di.compontents.DaggerActivityComponent;
-import me.niccorder.shop.app.di.compontents.DaggerApplicationComponent;
 import me.niccorder.shop.app.di.compontents.DaggerItemComponent;
 import me.niccorder.shop.app.di.compontents.ItemComponent;
 import me.niccorder.shop.app.di.module.ActivityModule;
 import me.niccorder.shop.app.pres.impl.MainPresenterImpl;
 import me.niccorder.shop.app.view.MenuView;
+import me.niccorder.shop.util.di.HasComponent;
 
+/** Currently waiting to finish the first microservice endpoint to implement */
 public class MainActivity extends AbstractActivity
     implements MenuView, HasComponent<ItemComponent> {
 

@@ -7,15 +7,13 @@ import dagger.Provides;
 import javax.inject.Singleton;
 import me.niccorder.shop.app.executors.JobExecutor;
 import me.niccorder.shop.app.executors.MainThread;
-import me.niccorder.shop.data.ShopClient;
-import me.niccorder.shop.data.api.ItemService;
-import me.niccorder.shop.domain.api.ItemRepository;
+import me.niccorder.shop.data.di.module.DataModule;
 import me.niccorder.shop.domain.executor.ExecutionThread;
 import me.niccorder.shop.domain.executor.PostExecutionThread;
 
 @Module public class ApplicationModule {
 
-  Application mApplication;
+  private Application mApplication;
 
   public ApplicationModule(Application application) {
     mApplication = application;
@@ -35,13 +33,5 @@ import me.niccorder.shop.domain.executor.PostExecutionThread;
 
   @Provides @Singleton PostExecutionThread providePostExecutionThread() {
     return new MainThread();
-  }
-
-  @Provides @Singleton ShopClient provideShopClient(final Application application) {
-    return new ShopClient(application);
-  }
-
-  @Provides @Singleton ItemRepository provideItemRepository(final ShopClient client) {
-    return client.getItemService();
   }
 }

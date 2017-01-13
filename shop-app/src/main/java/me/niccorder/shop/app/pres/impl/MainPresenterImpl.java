@@ -2,18 +2,16 @@ package me.niccorder.shop.app.pres.impl;
 
 import android.support.annotation.NonNull;
 import javax.inject.Inject;
-import me.niccorder.shop.app.di.PerActivity;
 import me.niccorder.shop.app.pres.MainPresenter;
-import me.niccorder.shop.app.pres.Presenter;
-import me.niccorder.shop.app.view.BaseView;
 import me.niccorder.shop.app.view.MenuView;
 import me.niccorder.shop.domain.interactor.GetItemInteractor;
+import me.niccorder.shop.util.di.PerActivity;
 import timber.log.Timber;
 
 /**
  * The presenter that handles the base activity functions.
  */
-@PerActivity public class MainPresenterImpl implements MainPresenter {
+public class MainPresenterImpl implements MainPresenter {
 
   private final GetItemInteractor mItemInteractor;
   private MenuView mMenuView;
