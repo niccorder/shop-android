@@ -9,6 +9,11 @@ import me.niccorder.shop.app.di.module.ApplicationModule;
 import me.niccorder.shop.data.di.module.DataModule;
 import timber.log.Timber;
 
+/**
+ * The base of our application. We initialize application wide components, features and dependencies
+ * at this time. Things like logging, leak detection, and of course dependency injection as well
+ * :-)
+ */
 public class BaseApplication extends Application {
 
   private ApplicationComponent mApplicationComponent;
@@ -30,7 +35,7 @@ public class BaseApplication extends Application {
     }
   }
 
-  /** Injects classes using dagger2 */
+  /** Injects classes using dagger2 <a href="https://google.github.io/dagger/"/> */
   private void injectDependencies() {
     mApplicationComponent = DaggerApplicationComponent.builder()
         .dataModule(new DataModule("http://www.google.com"))
@@ -45,7 +50,10 @@ public class BaseApplication extends Application {
     }
   }
 
-  /** Butterknife is a view injection/code generation tool from jake wharton. Its a life-saver. */
+  /**
+   * Butterknife is a view injection/code generation tool from jake wharton. Its a life-saver.
+   * <a href="http://jakewharton.github.io/butterknife/" />
+   */
   private void injectViews() {
     ButterKnife.setDebug(BuildConfig.DEBUG);
   }

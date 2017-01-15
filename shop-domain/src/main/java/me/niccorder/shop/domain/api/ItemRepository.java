@@ -1,13 +1,13 @@
 package me.niccorder.shop.domain.api;
 
 import java.util.List;
-import me.niccorder.shop.domain.model.ItemModel;
+import me.niccorder.shop.domain.model.DomainItemModel;
 import rx.Observable;
 
 public interface ItemRepository {
-  Observable<ItemModel> getItem(final String id);
+  Observable<DomainItemModel> getItem(final String id);
 
-  Observable<List<ItemModel>> getItems(final int pageIndex, final int pageSize);
+  Observable<List<DomainItemModel>> getItems(final int pageIndex, final int pageSize);
 
-  Observable<List<ItemModel>> getItems(final String searchTerm);
+  Observable<List<DomainItemModel>> getItems(final String searchTerm);
 }

@@ -15,6 +15,7 @@ import me.niccorder.shop.app.di.compontents.DaggerActivityComponent;
 import me.niccorder.shop.app.di.module.ActivityModule;
 import me.niccorder.shop.app.pres.impl.MainPresenterImpl;
 import me.niccorder.shop.app.view.MenuView;
+import me.niccorder.shop.app.view.fragment.ItemListFragment;
 import me.niccorder.shop.app.view.fragment.NotYetImplmentedFragment;
 import me.niccorder.shop.data.di.component.DaggerDataComponent;
 import me.niccorder.shop.util.di.HasComponent;
@@ -129,7 +130,7 @@ public class MainActivity extends AbstractActivity
         case POSITION_SEARCH:
           return NotYetImplmentedFragment.newInstance("Search");
         case POSITION_POPULAR:
-          return NotYetImplmentedFragment.newInstance("Popular");
+          return new ItemListFragment();
         case POSITION_CART:
           return NotYetImplmentedFragment.newInstance("Cart");
       }

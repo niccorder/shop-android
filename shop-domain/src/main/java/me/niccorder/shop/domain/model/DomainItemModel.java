@@ -1,11 +1,18 @@
 package me.niccorder.shop.domain.model;
 
-public class ItemModel {
+public class DomainItemModel {
 
   private String id;
   private String name;
-  private double price;
+  private float price;
   private String description;
+
+  public DomainItemModel(String id, String name, float price, String description) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.description = description;
+  }
 
   public String getId() {
     return id;
@@ -23,11 +30,11 @@ public class ItemModel {
     this.name = name;
   }
 
-  public double getPrice() {
+  public float getPrice() {
     return price;
   }
 
-  public void setPrice(double price) {
+  public void setPrice(float price) {
     this.price = price;
   }
 
@@ -41,9 +48,9 @@ public class ItemModel {
 
   @Override public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof ItemModel)) return false;
+    if (!(o instanceof DomainItemModel)) return false;
 
-    ItemModel itemModel = (ItemModel) o;
+    DomainItemModel itemModel = (DomainItemModel) o;
 
     if (Double.compare(itemModel.getPrice(), getPrice()) != 0) return false;
     if (!getId().equals(itemModel.getId())) return false;

@@ -8,9 +8,12 @@ import com.airbnb.epoxy.EpoxyHolder;
 /**
  * Base holder that all models should extend from.
  */
-public abstract class BaseViewHolder extends EpoxyHolder {
+abstract class BaseViewHolder extends EpoxyHolder {
+
+  protected View itemView;
 
   @CallSuper @Override protected void bindView(View itemView) {
     ButterKnife.bind(this, itemView);
+    this.itemView = itemView;
   }
 }
