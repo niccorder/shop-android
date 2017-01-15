@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.niccorder.shop.app.BaseApplication;
+import timber.log.Timber;
 
 public abstract class AbstractFragment extends Fragment {
 
@@ -33,6 +34,7 @@ public abstract class AbstractFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
 
     // Inject the view
+    Timber.v(provideLogTag(), "Injecting fragment's view");
     mUnbinder = ButterKnife.bind(this, view);
   }
 
@@ -40,7 +42,7 @@ public abstract class AbstractFragment extends Fragment {
     super.onDestroyView();
 
     // Release strong references created from view injection.
+    Timber.v(provideLogTag(), "release injected view.");
     mUnbinder.unbind();
-    mUnbinder = null;
   }
 }

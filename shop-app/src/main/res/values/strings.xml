@@ -94,4 +94,5 @@
   <string name="search">Search</string>
   <string name="popular_items">Popular Items</string>
   <string name="cart">Cart</string>
+  <string name="this_feature_has_not_been_implemented_yet">This feature has not been implemented yet.</string>
 </resources>

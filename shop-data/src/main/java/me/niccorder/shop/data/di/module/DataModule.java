@@ -37,8 +37,4 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
         .client(client)
         .build();
   }
-
-  @Provides @Singleton ItemRepository provideItemRepository(final Retrofit retrofit) {
-    return new ItemApiService(retrofit);
-  }
 }

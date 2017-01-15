@@ -14,7 +14,7 @@ import me.niccorder.shop.util.di.PerActivity;
 /**
  * A module to wrap the Activity state and expose it to the graph.
  */
- @Module public class ActivityModule {
+@Module public class ActivityModule {
 
   private final AppCompatActivity activity;
 
@@ -25,18 +25,17 @@ import me.niccorder.shop.util.di.PerActivity;
   /**
    * Expose the activity to dependents in the graph.
    */
-   @Provides AppCompatActivity activity() {
+  @PerActivity @Provides AppCompatActivity activity() {
     return this.activity;
   }
 
-   @Provides MainPresenterImpl provideMainPresenterImpl(
+  @PerActivity @Provides MainPresenterImpl provideMainPresenterImpl(
       GetItemInteractor getItemInteractor) {
     return new MainPresenterImpl(getItemInteractor);
   }
 
-   @Provides GetItemInteractor provideGetItemInteractor(
-      final ExecutionThread executionThread, final PostExecutionThread postExecutionThread,
-      final ItemRepository itemRepository) {
+  @PerActivity @Provides GetItemInteractor provideGetItemInteractor(final ExecutionThread executionThread,
+      final PostExecutionThread postExecutionThread, final ItemRepository itemRepository) {
     return new GetItemInteractor(executionThread, postExecutionThread, itemRepository);
   }
 }

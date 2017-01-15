@@ -6,6 +6,7 @@ import dagger.Component;
 import javax.inject.Singleton;
 import me.niccorder.shop.app.di.module.ApplicationModule;
 import me.niccorder.shop.data.di.module.RepositoryModule;
+import me.niccorder.shop.domain.api.ItemRepository;
 import me.niccorder.shop.domain.executor.ExecutionThread;
 import me.niccorder.shop.domain.executor.PostExecutionThread;
 
@@ -19,4 +20,6 @@ public interface ApplicationComponent {
   ExecutionThread executionThread();
 
   PostExecutionThread postExecutionThread();
+
+  ItemRepository itemRepository();
 }

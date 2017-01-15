@@ -28,28 +28,36 @@ public class MainPresenterImpl implements MainPresenter {
   }
 
   @Override public void create() {
-    mCurrentItemId = 0;
+    Timber.v("onCreate()");
+    mCurrentItemId = 1;
   }
 
   @Override public void resume() {
+    Timber.v("onResume()");
   }
 
   @Override public void pause() {
+    Timber.v("onPause()");
   }
 
   @Override public void destroy() {
     mMenuView = null;
+    Timber.v("onDestroy()");
   }
 
   @Override public int getSelectedItemId() {
+    Timber.v("getSelectedItemId()");
     return mCurrentItemId;
   }
 
   @Override public boolean onItemSelected(int itemId) {
+    Timber.v("onItemSelected()");
     if (mCurrentItemId != 0) mMenuView.deselectItem(mCurrentItemId);
 
     int previousItem = mCurrentItemId;
     mCurrentItemId = itemId;
+    mMenuView.selectItem(itemId);
+
     return previousItem == itemId;
   }
 }

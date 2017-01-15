@@ -6,6 +6,7 @@ import com.squareup.leakcanary.LeakCanary;
 import me.niccorder.shop.app.di.compontents.ApplicationComponent;
 import me.niccorder.shop.app.di.compontents.DaggerApplicationComponent;
 import me.niccorder.shop.app.di.module.ApplicationModule;
+import me.niccorder.shop.data.di.module.DataModule;
 import timber.log.Timber;
 
 public class BaseApplication extends Application {
@@ -31,8 +32,10 @@ public class BaseApplication extends Application {
 
   /** Injects classes using dagger2 */
   private void injectDependencies() {
-    mApplicationComponent =
-        DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
+    mApplicationComponent = DaggerApplicationComponent.builder()
+        .dataModule(new DataModule("http://www.google.com"))
+        .applicationModule(new ApplicationModule(this))
+        .build();
   }
 
   /** Timber is an awesome wrapper to android's LogCat <a href="https://github.com/jakewharton/timber"/> */
