@@ -20,7 +20,7 @@ public class ItemApiService implements ItemRepository {
   }
 
   @Override public Observable<List<DomainItemModel>> getItems(int pageIndex, int pageSize) {
-    return Observable.never();
+    return mItemService.getItems(pageIndex, pageSize);
   }
 
   @Override public Observable<List<DomainItemModel>> getItems(String searchTerm) {

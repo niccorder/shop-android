@@ -24,4 +24,13 @@ public class ItemAdapter extends SimpleEpoxyAdapter {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(this::addModels);
   }
+
+  public void addItem(ViewItemModel model) {
+    addModel(new ItemHolder_().itemId(model.id)
+        .name(model.name)
+        .description(model.description)
+        .price(model.price));
+  }
+
+  //// TODO: 1/15/17 Implement remove items & click features.
 }

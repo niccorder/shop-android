@@ -6,23 +6,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.widget.FrameLayout;
 import butterknife.BindView;
 import javax.inject.Inject;
 import me.niccorder.shop.app.R;
 import me.niccorder.shop.app.di.compontents.ActivityComponent;
 import me.niccorder.shop.app.di.compontents.DaggerActivityComponent;
+import me.niccorder.shop.app.di.compontents.DaggerItemComponent;
+import me.niccorder.shop.app.di.compontents.ItemComponent;
 import me.niccorder.shop.app.di.module.ActivityModule;
+import me.niccorder.shop.app.di.module.ItemModule;
 import me.niccorder.shop.app.pres.impl.MainPresenterImpl;
 import me.niccorder.shop.app.view.MenuView;
 import me.niccorder.shop.app.view.fragment.ItemListFragment;
 import me.niccorder.shop.app.view.fragment.NotYetImplmentedFragment;
-import me.niccorder.shop.data.di.component.DaggerDataComponent;
 import me.niccorder.shop.util.di.HasComponent;
 
 /** Currently waiting to finish the first microservice endpoint to implement */
 public class MainActivity extends AbstractActivity
-    implements MenuView, HasComponent<ActivityComponent> {
+    implements MenuView, HasComponent<ItemComponent> {
 
   private static final int POSITION_SEARCH = 0;
   private static final int POSITION_POPULAR = 1;
@@ -34,7 +35,7 @@ public class MainActivity extends AbstractActivity
   @BindView(R.id.container) ViewPager mFragmentPager;
 
   protected MainViewPagerAdapter mAdapter;
-  private ActivityComponent mActivityComponent;
+  private ItemComponent mItemComponent;
 
   @Override protected String provideLogTag() {
     return "MainActivity";
@@ -108,15 +109,15 @@ public class MainActivity extends AbstractActivity
   }
 
   private void initInjection() {
-    this.mActivityComponent = DaggerActivityComponent.builder()
-        .applicationComponent(getApplicationComponent())
+    mItemComponent = DaggerItemComponent.builder()
         .activityModule(new ActivityModule(this))
+        .itemModule(new ItemModule())
         .build();
-    mActivityComponent.inject(this);
+    mItemComponent.inject(this);
   }
 
-  @Override public ActivityComponent getComponent() {
-    return mActivityComponent;
+  @Override public ItemComponent getComponent() {
+    return mItemComponent;
   }
 
   private static class MainViewPagerAdapter extends FragmentStatePagerAdapter {

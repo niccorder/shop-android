@@ -13,14 +13,10 @@ import timber.log.Timber;
  */
 public class MainPresenterImpl implements MainPresenter {
 
-  private final GetItemInteractor mItemInteractor;
   private MenuView mMenuView;
-
   private int mCurrentItemId;
 
-  @Inject public MainPresenterImpl(@NonNull GetItemInteractor itemInteractor) {
-    Timber.d("Injecting %s", MainPresenterImpl.class);
-    this.mItemInteractor = itemInteractor;
+  public MainPresenterImpl() {
   }
 
   public void setView(@NonNull MenuView menuView) {

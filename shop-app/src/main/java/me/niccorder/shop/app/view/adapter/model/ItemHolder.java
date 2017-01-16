@@ -17,10 +17,10 @@ import me.niccorder.shop.app.R;
  */
 public class ItemHolder extends EpoxyModelWithHolder<ItemHolder.ItemViewHolder> {
 
-  @EpoxyAttribute String itemId;
-  @EpoxyAttribute String name;
-  @EpoxyAttribute @Nullable String description;
-  @EpoxyAttribute float price;
+  @EpoxyAttribute public String itemId;
+  @EpoxyAttribute public String name;
+  @EpoxyAttribute @Nullable public String description;
+  @EpoxyAttribute public float price;
   @EpoxyAttribute @Nullable View.OnClickListener clickListener;
 
   @Override protected ItemViewHolder createNewHolder() {

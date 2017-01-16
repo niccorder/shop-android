@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.niccorder.shop.app.BaseApplication;
+import me.niccorder.shop.util.di.HasComponent;
 import timber.log.Timber;
 
 public abstract class AbstractFragment extends Fragment {
@@ -44,5 +45,13 @@ public abstract class AbstractFragment extends Fragment {
     // Release strong references created from view injection.
     Timber.v(provideLogTag(), "release injected view.");
     mUnbinder.unbind();
+  }
+
+  /**
+   * Gets a component for dependency injection by its type.
+   */
+  @SuppressWarnings("unchecked")
+  protected <C> C getComponent(Class<C> componentType) {
+    return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
   }
 }
