@@ -7,6 +7,7 @@ import dagger.Provides;
 import javax.inject.Singleton;
 import me.niccorder.shop.app.executors.JobExecutor;
 import me.niccorder.shop.app.executors.MainThread;
+import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.data.di.module.DataModule;
 import me.niccorder.shop.domain.executor.ExecutionThread;
 import me.niccorder.shop.domain.executor.PostExecutionThread;
@@ -33,5 +34,9 @@ import me.niccorder.shop.domain.executor.PostExecutionThread;
 
   @Provides @Singleton PostExecutionThread providePostExecutionThread() {
     return new MainThread();
+  }
+
+  @Provides @Singleton ViewModelMapper provideViewModelMapper() {
+    return new ViewModelMapper();
   }
 }

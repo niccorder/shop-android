@@ -2,6 +2,8 @@ package me.niccorder.shop.app.di.module;
 
 import dagger.Module;
 import dagger.Provides;
+import javax.inject.Singleton;
+import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.app.pres.ItemListPresenter;
 import me.niccorder.shop.app.pres.impl.ItemListPresenterImpl;
 import me.niccorder.shop.app.view.fragment.ItemListFragment;

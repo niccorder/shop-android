@@ -9,8 +9,6 @@ import android.support.v4.view.ViewPager;
 import butterknife.BindView;
 import javax.inject.Inject;
 import me.niccorder.shop.app.R;
-import me.niccorder.shop.app.di.compontents.ActivityComponent;
-import me.niccorder.shop.app.di.compontents.DaggerActivityComponent;
 import me.niccorder.shop.app.di.compontents.DaggerItemComponent;
 import me.niccorder.shop.app.di.compontents.ItemComponent;
 import me.niccorder.shop.app.di.module.ActivityModule;
@@ -110,6 +108,7 @@ public class MainActivity extends AbstractActivity
 
   private void initInjection() {
     mItemComponent = DaggerItemComponent.builder()
+        .applicationComponent(getApplicationComponent())
         .activityModule(new ActivityModule(this))
         .itemModule(new ItemModule())
         .build();

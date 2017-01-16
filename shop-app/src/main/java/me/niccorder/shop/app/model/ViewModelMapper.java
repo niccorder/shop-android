@@ -15,6 +15,9 @@ import me.niccorder.shop.domain.model.DomainItemModel;
  */
 @Singleton public class ViewModelMapper {
 
+  public ViewModelMapper() {
+  }
+
   public ViewItemModel mapFrom(DomainItemModel domainItemModel) {
     return new ViewItemModel(domainItemModel.getId(), domainItemModel.getName(),
         domainItemModel.getDescription(), domainItemModel.getPrice());

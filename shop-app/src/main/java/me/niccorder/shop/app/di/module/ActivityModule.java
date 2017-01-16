@@ -34,8 +34,4 @@ import me.niccorder.shop.util.di.PerActivity;
   @PerActivity @Provides MainPresenterImpl provideMainPresenterImpl() {
     return new MainPresenterImpl();
   }
-
-  @Singleton @Provides ViewModelMapper provideViewModelMapper() {
-    return new ViewModelMapper();
-  }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import dagger.Component;
 import javax.inject.Singleton;
 import me.niccorder.shop.app.di.module.ApplicationModule;
+import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.data.di.module.RepositoryModule;
 import me.niccorder.shop.domain.api.ItemRepository;
 import me.niccorder.shop.domain.executor.ExecutionThread;
@@ -22,4 +23,6 @@ public interface ApplicationComponent {
   PostExecutionThread postExecutionThread();
 
   ItemRepository itemRepository();
+
+  ViewModelMapper viewModelMapper();
 }
