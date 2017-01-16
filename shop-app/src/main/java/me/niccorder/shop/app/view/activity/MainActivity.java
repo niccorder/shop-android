@@ -130,7 +130,7 @@ public class MainActivity extends AbstractActivity
         case POSITION_SEARCH:
           return NotYetImplmentedFragment.newInstance("Search");
         case POSITION_POPULAR:
-          return new ItemListFragment();
+          return ItemListFragment.newInstance();
         case POSITION_CART:
           return NotYetImplmentedFragment.newInstance("Cart");
       }

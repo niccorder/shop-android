@@ -10,4 +10,6 @@ public interface ItemRepository {
   Observable<List<DomainItemModel>> getItems(final int pageIndex, final int pageSize);
 
   Observable<List<DomainItemModel>> getItems(final String searchTerm);
+
+  Observable<List<DomainItemModel>> getAllItems();
 }

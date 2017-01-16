@@ -5,9 +5,7 @@ import android.view.View;
 import butterknife.ButterKnife;
 import com.airbnb.epoxy.EpoxyHolder;
 
-/**
- * Base holder that all models should extend from.
- */
+/** Base holder that all models should extend from. Injects views in view holder. */
 abstract class BaseViewHolder extends EpoxyHolder {
 
   protected View itemView;

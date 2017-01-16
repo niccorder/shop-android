@@ -13,6 +13,12 @@ import me.niccorder.shop.app.BaseApplication;
 import me.niccorder.shop.app.di.compontents.ApplicationComponent;
 import timber.log.Timber;
 
+/**
+ * A base activity of which all child activities should extend from. This provides functionalities
+ * that can be managed in a one-to-many relationship (i.e. view injection) which need to be managed
+ * correctly as to not induce a memory leak. This also provides functionalities for simplicity
+ * dependency injection, and ease of use methods for extending activities.
+ */
 public abstract class AbstractActivity extends AppCompatActivity {
 
   /** @return the tag that will show in logcat. */
@@ -21,6 +27,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
   /** @return the layout id for this activity */
   @LayoutRes protected abstract int provideLayoutId();
 
+  /** Allows children to be able to provide an id, and remove the inflating code bloat. */
   @CallSuper @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(provideLayoutId());

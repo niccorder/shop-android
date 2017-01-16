@@ -14,12 +14,21 @@ import me.niccorder.shop.app.model.ViewItemModel;
 import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.app.pres.ItemListPresenter;
 import me.niccorder.shop.app.view.ListItemView;
-import me.niccorder.shop.app.view.adapter.ItemAdapter;
 import me.niccorder.shop.app.view.adapter.model.ItemHolder_;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * A fragment which will display items in a list. This can, and should be handled by our
+ * ItemListPresenter, which should be handling what type of data we want to display. However, in
+ * this first draft the ItemListPresenter will do nothing but 'get all items'. This setup is
+ * intended to allow the {@link ItemListPresenter} to be extended in such a way that our {@link
+ * ItemListFragment} is negligent to how we decided our data will be displayed.
+ *
+ * For example, we could have a GetPopularListPresenter, GetNewListPresenter,
+ * GetPurchasedListPresenter... etc. and we can still reuse this ItemListFragment :-)
+ */
 public class ItemListFragment extends AbstractFragment implements ListItemView {
   private static final String TAG = ItemListFragment.class.getSimpleName();
 
@@ -29,6 +38,10 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
   @BindView(R.id.recycler) RecyclerView mRecycler;
 
   private SimpleEpoxyAdapter mRecyclerAdapter;
+
+  public static ItemListFragment newInstance() {
+    return new ItemListFragment();
+  }
 
   @Override protected int provideLayoutId() {
     return R.layout.layout_recycler;
@@ -89,15 +102,15 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
   }
 
   @Override public void onDisplayModel(ViewItemModel model) {
-
+    // TODO: 1/16/17 when a model has been clicked we usually want to do something.
   }
 
   @Override public void showLoading(boolean show) {
-
+    // TODO: 1/16/17 usually we want to show a progressbar when loading data.
   }
 
   @Override public void showNetworkError(boolean show) {
-
+    // TODO: 1/16/17 if we have bad network, we want to display a contextual message.
   }
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,6 +126,31 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
+    // Attach our adapter (provides/manages our recycler's data)
     mRecycler.setAdapter(mRecyclerAdapter);
+
+    // Notify the presenter we have been created.
+    mPresenter.create();
+  }
+
+  @Override public void onResume() {
+    super.onResume();
+
+    // Notify the presenter we are resuming.
+    mPresenter.resume();
+  }
+
+  @Override public void onPause() {
+    super.onPause();
+
+    // Notify the presenter we are pausing.
+    mPresenter.pause();
+  }
+
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+
+    // Notify the presenter we are destroying.
+    mPresenter.destroy();
   }
 }

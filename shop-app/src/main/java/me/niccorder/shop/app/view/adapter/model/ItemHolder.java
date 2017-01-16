@@ -18,19 +18,26 @@ import me.niccorder.shop.app.R;
 public class ItemHolder extends EpoxyModelWithHolder<ItemHolder.ItemViewHolder> {
 
   @EpoxyAttribute public String itemId;
+
   @EpoxyAttribute public String name;
+
   @EpoxyAttribute @Nullable public String description;
+
   @EpoxyAttribute public float price;
+
   @EpoxyAttribute @Nullable View.OnClickListener clickListener;
 
+  /** Tell epoxy how to create a viewmodel of our type */
   @Override protected ItemViewHolder createNewHolder() {
     return new ItemViewHolder();
   }
 
+  /** Provide the layout for our viewmodel for epoxy to create */
   @Override protected int getDefaultLayout() {
     return R.layout.view_item_basic;
   }
 
+  /** Tell epoxy how to bind data to our view model. */
   @Override public void bind(ItemViewHolder holder) {
     super.bind(holder);
     holder.title.setText(name);
@@ -38,6 +45,7 @@ public class ItemHolder extends EpoxyModelWithHolder<ItemHolder.ItemViewHolder> 
     holder.itemView.setOnClickListener(clickListener);
   }
 
+  /** View holder pattern used in android to improve list performance */
   static class ItemViewHolder extends BaseViewHolder {
     @BindView(R.id.title_text) TextView title;
     @BindView(R.id.caption_text) TextView caption;
