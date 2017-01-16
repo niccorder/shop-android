@@ -1,6 +1,8 @@
 package me.niccorder.shop.app.pres;
 
-public interface MainPresenter extends Presenter {
+import me.niccorder.shop.app.view.MenuView;
+
+public interface MainPresenter extends Presenter<MenuView> {
 
   boolean onItemSelected(int itemId);
 

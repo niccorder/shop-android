@@ -1,3 +1,5 @@
-include ':shop-app', ':shop-util'
+include ':shop-app'
+include ':shop-util'
+include ':shop-util:util-inject'
 include ':shop-data'
 include ':shop-domain'

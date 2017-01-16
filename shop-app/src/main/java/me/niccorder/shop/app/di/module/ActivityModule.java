@@ -3,14 +3,7 @@ package me.niccorder.shop.app.di.module;
 import android.support.v7.app.AppCompatActivity;
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
-import me.niccorder.shop.app.model.ViewItemModel;
-import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.app.pres.impl.MainPresenterImpl;
-import me.niccorder.shop.domain.api.ItemRepository;
-import me.niccorder.shop.domain.executor.ExecutionThread;
-import me.niccorder.shop.domain.executor.PostExecutionThread;
-import me.niccorder.shop.domain.interactor.GetItemInteractor;
 import me.niccorder.shop.util.di.PerActivity;
 
 /**

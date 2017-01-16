@@ -58,7 +58,7 @@ dependencies {
   compile project.ext.timber
 
   compile project(":shop-domain")
-  compile project(":shop-util")
+  compile project(":shop-util:util-inject")
 
   testCompile project.ext.junit
   testCompile project.ext.retrofit_mock

@@ -1,11 +1,8 @@
 package me.niccorder.shop.app.pres.impl;
 
-import android.support.annotation.NonNull;
 import javax.inject.Inject;
 import me.niccorder.shop.app.pres.MainPresenter;
 import me.niccorder.shop.app.view.MenuView;
-import me.niccorder.shop.domain.interactor.GetItemInteractor;
-import me.niccorder.shop.util.di.PerActivity;
 import timber.log.Timber;
 
 /**
@@ -13,14 +10,17 @@ import timber.log.Timber;
  */
 public class MainPresenterImpl implements MainPresenter {
 
+  /** The view that our presenter will be interacting with */
   private MenuView mMenuView;
+
+  /** The currently selected item id */
   private int mCurrentItemId;
 
-  public MainPresenterImpl() {
+  @Inject public MainPresenterImpl() {
   }
 
-  public void setView(@NonNull MenuView menuView) {
-    this.mMenuView = menuView;
+  @Override public void setView(MenuView view) {
+    this.mMenuView = view;
   }
 
   @Override public void create() {

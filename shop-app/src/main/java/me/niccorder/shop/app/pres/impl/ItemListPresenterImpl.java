@@ -1,37 +1,45 @@
 package me.niccorder.shop.app.pres.impl;
 
+import java.util.List;
 import javax.inject.Inject;
 import me.niccorder.shop.app.model.ViewItemModel;
 import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.app.pres.ItemListPresenter;
+import me.niccorder.shop.app.view.BaseView;
 import me.niccorder.shop.app.view.ListItemView;
-import me.niccorder.shop.domain.api.ItemRepository;
+import me.niccorder.shop.domain.interactor.GetItemInteractor;
 
 /**
  * Implementation of {@link ItemListPresenter} that will actually preform the contract that the
  * {@link ItemListPresenter provides.}
  */
-public class ItemListPresenterImpl implements ItemListPresenter {
+public class ItemListPresenterImpl implements ItemListPresenter<ListItemView> {
 
-  /**
-   * Inject the repository that this presenter will be using. It is up to dagger to delegate where
-   * our {@link me.niccorder.shop.domain.api.ItemRepository} is requesting data from.
-   */
-  @Inject ItemRepository itemRepository;
+  /** Our interactor that our presenter will be using */
+  private GetItemInteractor getItemInteractor;
 
   /**
    * A view model mapper that reduces the burden of mapping items to and from each respective
    * model
    */
-  @Inject ViewModelMapper modelMapper;
+  private ViewModelMapper modelMapper;
 
   /**
    * Our view that this presenter is managing.
    */
   private ListItemView view;
 
-  /** It is the view's job to attach iteself to the presenter. */
-  public void setView(ListItemView view) {
+  /**
+   * Dagger will inject our object since we have this annotated.
+   */
+  @Inject public ItemListPresenterImpl(GetItemInteractor getItemInteractor,
+      ViewModelMapper modelMapper) {
+    this.getItemInteractor = getItemInteractor;
+    this.modelMapper = modelMapper;
+  }
+
+  /** The view is responsible for attaching/detaching itself. */
+  @Override public void setView(ListItemView view) {
     this.view = view;
   }
 
@@ -44,11 +52,9 @@ public class ItemListPresenterImpl implements ItemListPresenter {
   }
 
   @Override public void create() {
-    itemRepository.getItems(0, 10).map(modelMapper::mapFromDomain).subscribe(view::addItems);
   }
 
   @Override public void resume() {
-
   }
 
   @Override public void pause() {

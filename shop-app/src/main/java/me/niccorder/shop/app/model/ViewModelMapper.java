@@ -46,6 +46,13 @@ import me.niccorder.shop.domain.model.DomainItemModel;
     return viewModelList;
   }
 
+  public ItemHolder mapToHolder(DomainItemModel model) {
+    return new ItemHolder_().itemId(model.getId())
+        .name(model.getName())
+        .price(model.getPrice())
+        .description(model.getDescription());
+  }
+
   public ItemHolder mapToHolder(ViewItemModel model) {
     return new ItemHolder_().itemId(model.id)
         .name(model.name)

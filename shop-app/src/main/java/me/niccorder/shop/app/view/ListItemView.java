@@ -1,7 +1,7 @@
 package me.niccorder.shop.app.view;
 
 import java.util.Collection;
-import me.niccorder.shop.app.model.ViewItemModel;
+import me.niccorder.shop.domain.model.DomainItemModel;
 
 /**
  * The contract that is applied to showing a list of items. This should be extended, and rarely (if
@@ -13,17 +13,17 @@ import me.niccorder.shop.app.model.ViewItemModel;
  * speed up the process. Don't do what I did.
  */
 public interface ListItemView extends BaseView {
-  void addItem(ViewItemModel model);
+  void addItem(DomainItemModel model);
 
-  void addItems(ViewItemModel... models);
+  void addItems(DomainItemModel... models);
 
-  void addItems(Collection<ViewItemModel> models);
+  void addItems(Collection<DomainItemModel> models);
 
-  void removeItem(ViewItemModel model);
+  void removeItem(DomainItemModel model);
 
-  void removeItems(ViewItemModel... models);
+  void removeItems(DomainItemModel... models);
 
   void removeAllItems();
 
-  void onDisplayModel(ViewItemModel model);
+  void onDisplayModel(DomainItemModel model);
 }

@@ -2,11 +2,10 @@ package me.niccorder.shop.app.di.module;
 
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
 import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.app.pres.ItemListPresenter;
 import me.niccorder.shop.app.pres.impl.ItemListPresenterImpl;
-import me.niccorder.shop.app.view.fragment.ItemListFragment;
+import me.niccorder.shop.app.view.ListItemView;
 import me.niccorder.shop.domain.api.ItemRepository;
 import me.niccorder.shop.domain.executor.ExecutionThread;
 import me.niccorder.shop.domain.executor.PostExecutionThread;
@@ -21,8 +20,9 @@ import me.niccorder.shop.util.di.PerActivity;
   public ItemModule() {
   }
 
-  @PerActivity @Provides ItemListPresenter provideItemListPresenter() {
-    return new ItemListPresenterImpl();
+  @PerActivity @Provides ItemListPresenter<ListItemView> provideItemListPresenter(
+      GetItemInteractor getItemInteractor, ViewModelMapper viewModelMapper) {
+    return new ItemListPresenterImpl(getItemInteractor, viewModelMapper);
   }
 
   @PerActivity @Provides GetItemInteractor provideGetItemInteractor(

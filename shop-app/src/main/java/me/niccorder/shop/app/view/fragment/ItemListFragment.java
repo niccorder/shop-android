@@ -10,11 +10,11 @@ import java.util.Collection;
 import javax.inject.Inject;
 import me.niccorder.shop.app.R;
 import me.niccorder.shop.app.di.compontents.ItemComponent;
-import me.niccorder.shop.app.model.ViewItemModel;
 import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.app.pres.ItemListPresenter;
 import me.niccorder.shop.app.view.ListItemView;
 import me.niccorder.shop.app.view.adapter.model.ItemHolder_;
+import me.niccorder.shop.domain.model.DomainItemModel;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -32,7 +32,7 @@ import rx.schedulers.Schedulers;
 public class ItemListFragment extends AbstractFragment implements ListItemView {
   private static final String TAG = ItemListFragment.class.getSimpleName();
 
-  @Inject ItemListPresenter mPresenter;
+  @Inject ItemListPresenter<ListItemView> mPresenter;
   @Inject ViewModelMapper mMapper;
 
   @BindView(R.id.recycler) RecyclerView mRecycler;
@@ -51,45 +51,45 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
     return TAG;
   }
 
-  @Override public void addItem(ViewItemModel model) {
-    mRecyclerAdapter.addModels(new ItemHolder_().itemId(model.id)
-        .description(model.description)
-        .price(model.price)
-        .name(model.name));
+  @Override public void addItem(DomainItemModel model) {
+    mRecyclerAdapter.addModels(new ItemHolder_().itemId(model.getId())
+        .description(model.getDescription())
+        .price(model.getPrice())
+        .name(model.getName()));
   }
 
-  @Override public void addItems(ViewItemModel... models) {
+  @Override public void addItems(DomainItemModel... models) {
     Observable.from(models)
-        .map(model -> new ItemHolder_().itemId(model.id)
-            .description(model.description)
-            .price(model.price)
-            .name(model.name))
+        .map(model -> new ItemHolder_().itemId(model.getId())
+            .description(model.getDescription())
+            .price(model.getPrice())
+            .name(model.getName()))
         .toList()
         .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(mRecyclerAdapter::addModels);
   }
 
-  @Override public void addItems(Collection<ViewItemModel> models) {
+  @Override public void addItems(Collection<DomainItemModel> models) {
     Observable.from(models)
-        .map(model -> new ItemHolder_().itemId(model.id)
-            .description(model.description)
-            .price(model.price)
-            .name(model.name))
+        .map(model -> new ItemHolder_().itemId(model.getId())
+            .description(model.getDescription())
+            .price(model.getPrice())
+            .name(model.getName()))
         .toList()
         .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(mRecyclerAdapter::addModels);
   }
 
-  @Override public void removeItem(ViewItemModel model) {
-    mRecyclerAdapter.removeModel(new ItemHolder_().itemId(model.id)
-        .description(model.description)
-        .price(model.price)
-        .name(model.name));
+  @Override public void removeItem(DomainItemModel model) {
+    mRecyclerAdapter.removeModel(new ItemHolder_().itemId(model.getId())
+        .description(model.getDescription())
+        .price(model.getPrice())
+        .name(model.getName()));
   }
 
-  @Override public void removeItems(ViewItemModel... models) {
+  @Override public void removeItems(DomainItemModel... models) {
     Observable.from(models)
         .map(mMapper::mapToHolder)
         .subscribeOn(Schedulers.newThread())
@@ -101,7 +101,7 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
     Observable.from(mRecyclerAdapter.getModels()).subscribe(mRecyclerAdapter::removeModel);
   }
 
-  @Override public void onDisplayModel(ViewItemModel model) {
+  @Override public void onDisplayModel(DomainItemModel model) {
     // TODO: 1/16/17 when a model has been clicked we usually want to do something.
   }
 
@@ -116,7 +116,7 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // Inject dependencies.
+    // Inject our instance dependencies (i.e. our presenter, and our view model mapper)
     getComponent(ItemComponent.class).inject(this);
 
     // Setup adapter.
@@ -126,11 +126,16 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
+    // Attach ourselves to our presenter.
+    mPresenter.setView(this);
+
     // Attach our adapter (provides/manages our recycler's data)
     mRecycler.setAdapter(mRecyclerAdapter);
 
-    // Notify the presenter we have been created.
-    mPresenter.create();
+    if (savedInstanceState == null) {
+      // Notify the presenter we have been created.
+      mPresenter.create();
+    }
   }
 
   @Override public void onResume() {
