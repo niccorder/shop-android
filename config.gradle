@@ -49,7 +49,7 @@ ext {
 
 
   /* Generated build configuration variables. */
-  productionUrl = ['String', 'BASE_URL', '"https://api.niccorder.me"']
+  productionUrl = ['String', 'BASE_URL', '"http://api.niccorder.me/item/"']
   stagingUrl = productionUrl // for now.
 }
 

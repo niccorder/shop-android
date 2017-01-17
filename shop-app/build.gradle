@@ -19,10 +19,21 @@ android {
     versionName project.ext.versionName
 
     vectorDrawables.useSupportLibrary true
+    buildConfigField 'String', 'BASE_URL', '"http://api.niccorder.me/"'
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
   buildTypes {
     release {
+      debuggable false
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+    releaseDebug {
+      debuggable true
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+    stageDebug {
       debuggable true
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

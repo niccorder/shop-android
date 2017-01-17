@@ -38,7 +38,7 @@ public class BaseApplication extends Application {
   /** Injects classes using dagger2 <a href="https://google.github.io/dagger/"/> */
   private void injectDependencies() {
     mApplicationComponent = DaggerApplicationComponent.builder()
-        .dataModule(new DataModule("http://7216ccd7.ngrok.io"))
+        .dataModule(new DataModule(BuildConfig.BASE_URL))
         .applicationModule(new ApplicationModule(this))
         .build();
   }
