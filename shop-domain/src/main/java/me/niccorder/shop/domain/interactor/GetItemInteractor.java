@@ -7,6 +7,7 @@ import me.niccorder.shop.domain.executor.ExecutionThread;
 import me.niccorder.shop.domain.executor.PostExecutionThread;
 import me.niccorder.shop.domain.model.DomainItemModel;
 import me.niccorder.shop.domain.util.Params;
+import me.niccorder.shop.util.exception.NotYetImplementedException;
 import rx.Observable;
 
 public class GetItemInteractor extends AbstractInteractor {
@@ -23,14 +24,13 @@ public class GetItemInteractor extends AbstractInteractor {
   }
 
   @SuppressWarnings("unchecked") public Observable<List<DomainItemModel>> getAllItems() {
-    Optional<Params> params = Optional.absent();
-    return create(params);
+    return execute(Optional.absent());
   }
 
   /** Will run our use case with the given parameters. */
   @Override public Observable create(Optional<Params> parameters) {
-    if (parameters.isPresent()) {
-      throw new RuntimeException();
+    if (parameters.orNull() != null) {
+      throw new NotYetImplementedException("Pagination has not yet been implemented.");
     }
 
     return itemRepository.getAllItems();

@@ -14,6 +14,5 @@ import retrofit2.Retrofit;
  * accordingly.
  */
 @Singleton @Component(modules = { RepositoryModule.class }) public interface DataComponent {
-  OkHttpClient okHttpClient();
   Retrofit retrofit();
 }

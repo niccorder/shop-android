@@ -20,7 +20,7 @@ public class JobExecutor implements ExecutionThread {
   }
 
   @Override public void execute(Runnable command) {
-
+    threadPoolExecutor.execute(command);
   }
 
   private static class JobThreadFactory implements ThreadFactory {

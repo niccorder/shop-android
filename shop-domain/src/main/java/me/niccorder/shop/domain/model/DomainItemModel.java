@@ -75,7 +75,7 @@ public class DomainItemModel {
         "id='" + id + '\'' +
         ", name='" + name + '\'' +
         ", price=" + price +
-        ", description='" + description + '\'' +
+        (description == null ? "" : ", description='" + description  + '\'') +
         '}';
   }
 }

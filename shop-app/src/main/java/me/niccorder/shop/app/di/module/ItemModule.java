@@ -20,14 +20,14 @@ import me.niccorder.shop.util.di.PerActivity;
   public ItemModule() {
   }
 
-  @PerActivity @Provides ItemListPresenter<ListItemView> provideItemListPresenter(
-      GetItemInteractor getItemInteractor, ViewModelMapper viewModelMapper) {
-    return new ItemListPresenterImpl(getItemInteractor, viewModelMapper);
-  }
-
   @PerActivity @Provides GetItemInteractor provideGetItemInteractor(
       final ExecutionThread executionThread, final PostExecutionThread postExecutionThread,
       final ItemRepository itemRepository) {
     return new GetItemInteractor(executionThread, postExecutionThread, itemRepository);
+  }
+
+  @PerActivity @Provides ItemListPresenter<ListItemView> provideItemListPresenter(
+      GetItemInteractor getItemInteractor) {
+    return new ItemListPresenterImpl(getItemInteractor);
   }
 }

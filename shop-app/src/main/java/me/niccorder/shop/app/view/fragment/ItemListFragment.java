@@ -2,10 +2,14 @@ package me.niccorder.shop.app.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import butterknife.BindView;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
+import com.google.common.collect.Collections2;
+import java.util.Arrays;
 import java.util.Collection;
 import javax.inject.Inject;
 import me.niccorder.shop.app.R;
@@ -13,11 +17,15 @@ import me.niccorder.shop.app.di.compontents.ItemComponent;
 import me.niccorder.shop.app.model.ViewModelMapper;
 import me.niccorder.shop.app.pres.ItemListPresenter;
 import me.niccorder.shop.app.view.ListItemView;
+import me.niccorder.shop.app.view.adapter.ItemAdapter;
+import me.niccorder.shop.app.view.adapter.divider.GridDividerItemDecoration;
+import me.niccorder.shop.app.view.adapter.divider.ItemDividerDecoration;
 import me.niccorder.shop.app.view.adapter.model.ItemHolder_;
 import me.niccorder.shop.domain.model.DomainItemModel;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * A fragment which will display items in a list. This can, and should be handled by our
@@ -37,14 +45,15 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
 
   @BindView(R.id.recycler) RecyclerView mRecycler;
 
-  private SimpleEpoxyAdapter mRecyclerAdapter;
+  private ItemAdapter mRecyclerAdapter;
+  private GridLayoutManager mGridLayoutManager;
 
   public static ItemListFragment newInstance() {
     return new ItemListFragment();
   }
 
   @Override protected int provideLayoutId() {
-    return R.layout.layout_recycler;
+    return R.layout.fragment_recycler_with_add;
   }
 
   @Override protected String provideLogTag() {
@@ -65,19 +74,19 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
             .price(model.getPrice())
             .name(model.getName()))
         .toList()
-        .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(mRecyclerAdapter::addModels);
   }
 
   @Override public void addItems(Collection<DomainItemModel> models) {
+    Timber.v("addingItems [%s]", Arrays.toString(models.toArray()));
     Observable.from(models)
+        .doOnEach(notification -> Timber.v("Recieved: %s", notification.getValue()))
         .map(model -> new ItemHolder_().itemId(model.getId())
             .description(model.getDescription())
             .price(model.getPrice())
             .name(model.getName()))
         .toList()
-        .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(mRecyclerAdapter::addModels);
   }
@@ -110,6 +119,7 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
   }
 
   @Override public void showNetworkError(boolean show) {
+    Timber.w("There was an error with our network!");
     // TODO: 1/16/17 if we have bad network, we want to display a contextual message.
   }
 
@@ -120,7 +130,8 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
     getComponent(ItemComponent.class).inject(this);
 
     // Setup adapter.
-    mRecyclerAdapter = new SimpleEpoxyAdapter();
+    mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+    mRecyclerAdapter = new ItemAdapter();
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -130,6 +141,9 @@ public class ItemListFragment extends AbstractFragment implements ListItemView {
     mPresenter.setView(this);
 
     // Attach our adapter (provides/manages our recycler's data)
+    mRecycler.addItemDecoration(
+        new GridDividerItemDecoration(getDimensionPixelSize(R.dimen.spacing_micro), 2));
+    mRecycler.setLayoutManager(mGridLayoutManager);
     mRecycler.setAdapter(mRecyclerAdapter);
 
     if (savedInstanceState == null) {

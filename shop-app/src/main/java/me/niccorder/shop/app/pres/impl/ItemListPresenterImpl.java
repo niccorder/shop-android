@@ -1,5 +1,6 @@
 package me.niccorder.shop.app.pres.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 import me.niccorder.shop.app.model.ViewItemModel;
@@ -8,6 +9,9 @@ import me.niccorder.shop.app.pres.ItemListPresenter;
 import me.niccorder.shop.app.view.BaseView;
 import me.niccorder.shop.app.view.ListItemView;
 import me.niccorder.shop.domain.interactor.GetItemInteractor;
+import me.niccorder.shop.domain.model.DomainItemModel;
+import rx.functions.Action1;
+import timber.log.Timber;
 
 /**
  * Implementation of {@link ItemListPresenter} that will actually preform the contract that the
@@ -19,12 +23,6 @@ public class ItemListPresenterImpl implements ItemListPresenter<ListItemView> {
   private GetItemInteractor getItemInteractor;
 
   /**
-   * A view model mapper that reduces the burden of mapping items to and from each respective
-   * model
-   */
-  private ViewModelMapper modelMapper;
-
-  /**
    * Our view that this presenter is managing.
    */
   private ListItemView view;
@@ -32,10 +30,8 @@ public class ItemListPresenterImpl implements ItemListPresenter<ListItemView> {
   /**
    * Dagger will inject our object since we have this annotated.
    */
-  @Inject public ItemListPresenterImpl(GetItemInteractor getItemInteractor,
-      ViewModelMapper modelMapper) {
+  @Inject public ItemListPresenterImpl(GetItemInteractor getItemInteractor) {
     this.getItemInteractor = getItemInteractor;
-    this.modelMapper = modelMapper;
   }
 
   /** The view is responsible for attaching/detaching itself. */
@@ -48,13 +44,21 @@ public class ItemListPresenterImpl implements ItemListPresenter<ListItemView> {
   }
 
   @Override public void refreshAllItems() {
-    // TODO: 1/16/17 Handle logic for refreshing all items in the list.
+    Timber.d("refreshAllItems()");
+    getItemInteractor.getAllItems().subscribe(s -> {
+      Timber.d("Received items! [%s]", Arrays.toString(s.toArray()));
+      view.addItems(s);
+    }, throwable -> Timber.e(throwable, "There was an error in our network request."));
   }
 
   @Override public void create() {
   }
 
   @Override public void resume() {
+    getItemInteractor.getAllItems().subscribe(s -> {
+      Timber.d("Received items! [%s]", Arrays.toString(s.toArray()));
+      view.addItems(s);
+    }, throwable -> Timber.e(throwable, "There was an error in our network request."));
   }
 
   @Override public void pause() {

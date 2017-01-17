@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:color="@color/io15_white" android:state_selected="true"/>
+  <item android:color="@color/io15_white" android:state_activated="true"/>
 
 
   <!-- Default color -->
-  <item android:color="@color/io15_light_grey"/>
+  <item android:color="@color/io15_white_90"/>
 </selector>

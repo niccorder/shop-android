@@ -18,11 +18,12 @@ public abstract class AbstractInteractor {
     this.postExecutionThread = postExecutionThread;
   }
 
+  /** To be implemented by our interactors */
   public abstract Observable create(Optional<Params> parameters);
 
-  public void execute(final Params parameters) {
-    final Observable observable = create(Optional.of(parameters))
-        .subscribeOn(Schedulers.from(executionThread))
+  /** To be called by our interactors run their use-case */
+  public Observable execute(Optional<Params> parameters) {
+    return create(parameters).subscribeOn(Schedulers.from(executionThread))
         .observeOn(postExecutionThread.getScheduler());
   }
 }

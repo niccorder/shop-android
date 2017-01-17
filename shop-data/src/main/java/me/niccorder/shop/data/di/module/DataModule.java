@@ -3,19 +3,16 @@ package me.niccorder.shop.data.di.module;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
-import me.niccorder.shop.data.BuildConfig;
-import me.niccorder.shop.data.net.ItemApiService;
+import me.niccorder.shop.data.net.util.HeaderApplicatorInterceptor;
 import me.niccorder.shop.data.net.util.SimpleRequestLogger;
-import me.niccorder.shop.domain.api.ItemRepository;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.jackson.JacksonConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A data module which will provide and create all of data-module networking repository items. This
- * can
- * be split into submodules as necessary, but for an initial pass one module is good enough.
+ * can be split into submodules as necessary, but for an initial pass one module is good enough.
  */
 @Module public class DataModule {
 
@@ -27,13 +24,15 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
   }
 
   @Provides @Singleton OkHttpClient provideOkhttp3() {
-    return new OkHttpClient.Builder().addInterceptor(new SimpleRequestLogger()).build();
+    return new OkHttpClient.Builder().addInterceptor(new HeaderApplicatorInterceptor())
+        .addInterceptor(new SimpleRequestLogger())
+        .build();
   }
 
   @Provides @Singleton Retrofit provideRetrofit(final OkHttpClient client) {
     return new Retrofit.Builder().baseUrl(baseUrl)
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        .addConverterFactory(JacksonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build();
   }

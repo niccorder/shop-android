@@ -40,7 +40,7 @@ ext {
   def retrofitVersion = '2.1.0'
   retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
   retrofit_rxjava = "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
-  retrofit_jackson = "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
+  retrofit_gson = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
   retrofit_mock = "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
 
   /* Testing dependencies */

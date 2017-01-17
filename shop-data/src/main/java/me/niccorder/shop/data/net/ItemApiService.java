@@ -6,6 +6,7 @@ import me.niccorder.shop.domain.api.ItemRepository;
 import me.niccorder.shop.domain.model.DomainItemModel;
 import retrofit2.Retrofit;
 import rx.Observable;
+import timber.log.Timber;
 
 /**
  * A simple implementation of the domain layers {@link ItemRepository}. This enables us to not
@@ -40,6 +41,7 @@ public class ItemApiService implements ItemRepository {
 
   /** Returns all items from our rest endpoint. */
   @Override public Observable<List<DomainItemModel>> getAllItems() {
+    Timber.d("getAllItems()");
     return mItemService.getItems();
   }
 }

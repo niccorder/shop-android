@@ -2,6 +2,7 @@ package me.niccorder.shop.app.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.DimenRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,27 +30,45 @@ public abstract class AbstractFragment extends Fragment {
   /** @return a String that will represent this fragment in logging. */
   protected abstract String provideLogTag();
 
+  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    Timber.d(provideLogTag(), "onCreate()");
+  }
+
   /**
    * Ease of use capability to allow extending fragments to not have more code bloat than
    * necessary.
    */
   @CallSuper @Nullable @Override public View onCreateView(LayoutInflater inflater,
       @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    Timber.d(provideLogTag(), "onCreateView()");
     return inflater.inflate(provideLayoutId(), container, false);
   }
 
   /** Injects the view using butterknife. This creates strong references that must be released */
   @CallSuper @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    Timber.d(provideLogTag(), "onViewCreated()");
 
     // Inject the view
     Timber.v(provideLogTag(), "Injecting fragment's view");
     mUnbinder = ButterKnife.bind(this, view);
   }
 
+  @Override public void onResume() {
+    super.onResume();
+    Timber.d(provideLogTag(), "onResume()");
+  }
+
+  @Override public void onPause() {
+    super.onPause();
+    Timber.d(provideLogTag(), "onPause()");
+  }
+
   /** Releases our strong references as to allow for GC */
   @CallSuper @Override public void onDestroyView() {
     super.onDestroyView();
+    Timber.d(provideLogTag(), "onDestroyView()");
 
     Timber.v(provideLogTag(), "release injected view.");
     mUnbinder.unbind();
@@ -57,6 +76,11 @@ public abstract class AbstractFragment extends Fragment {
 
   /** Gets a component for dependency injection by its type. */
   @SuppressWarnings("unchecked") protected <C> C getComponent(Class<C> componentType) {
+    Timber.d(provideLogTag(), "getComponent()");
     return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
+  }
+
+  protected int getDimensionPixelSize(@DimenRes int dimensionRes) {
+    return getResources().getDimensionPixelSize(dimensionRes);
   }
 }

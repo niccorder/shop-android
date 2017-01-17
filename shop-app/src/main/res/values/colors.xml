@@ -34,6 +34,7 @@
   <color name="io15_aqua_light">#FF80DEEA</color>
   <color name="io15_blue_grey_100">#ffcfd8dc</color>
   <color name="io15_white">#FFFFFFFF</color>
+  <color name="io15_white_90">#e1ffffff</color>
   <color name="card">#fff</color>
   <color name="cyan_a700_plus">#ff006574</color>
 

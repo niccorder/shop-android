@@ -1,0 +1,7 @@
+apply plugin: 'java'
+apply from: "$rootDir/config.gradle"
+apply plugin: 'me.tatarka.retrolambda'
+
+retrolambda {
+  javaVersion JavaVersion.VERSION_1_7
+}

@@ -9,6 +9,7 @@ retrolambda {
 dependencies {
   compile project.ext.rxjava
   compile project.ext.guava
+  compile project(':shop-util:util-exception')
 }
 
 repositories {

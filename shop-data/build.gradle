@@ -54,7 +54,7 @@ dependencies {
   compile project.ext.rxjava
   compile project.ext.retrofit
   compile project.ext.retrofit_rxjava
-  compile project.ext.retrofit_jackson
+  compile project.ext.retrofit_gson
   compile project.ext.timber
 
   compile project(":shop-domain")
